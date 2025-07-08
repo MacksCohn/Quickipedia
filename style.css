@@ -1,0 +1,28 @@
+/* Max Cohn */
+body {
+    background-color: #111111;
+    color: #EEEEEE;
+}
+#center-box {
+    width: fit-content;
+    height:10%;
+    margin: 50% auto;
+    text-align: center;
+    font-size: 400%;
+}
+
+#center-box > #search {
+    width:50%;
+}
+
+#center-box > #visible-list {
+    margin: 0 auto;
+    width:50%;
+    padding:0;
+}
+
+#center-box > #visible-list > li {
+    font-size: 20%;
+    list-style:none;
+    text-align: right;
+}
