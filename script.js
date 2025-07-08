@@ -39,6 +39,11 @@ function OnKeyDown() {
     $($listElements[selected]).addClass('selected');
 }
 
+function ClickSearchElement() {
+    console.log('test');
+    console.log($(this).text());
+}
+
 function HandleSearch() {
     const searchInput = $('input').val();
     const apiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${searchInput}&format=json&origin=*`;
@@ -50,12 +55,10 @@ function HandleSearch() {
     $.getJSON(apiUrl, function(data) {
         if (data.length > 0) {
             data[1].forEach(searchTerm => {
-                // const term = $('<option value="' + searchTerm + '">');
-                // list.append(term);
-                visible.append('<li>'+searchTerm+'</li>')
+                const $li = $('<li>'+searchTerm+'</li>');
+                visible.append($li);
+                $li.on('click', ClickSearchElement);
             });
         }
-        else
-            console.log('no data');
     });
 }
