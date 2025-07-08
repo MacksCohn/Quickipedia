@@ -1,5 +1,6 @@
 // Max Cohn
 let selected = -1;
+const MAX_LIST = 10;
 
 $(document).ready(function() {
     $('input').on('input', HandleSearch);
@@ -40,24 +41,33 @@ function OnKeyDown() {
 }
 
 function ClickSearchElement() {
-    console.log('test');
     console.log($(this).text());
+    if (selected != -1)
+        $($('#visible-list').children()[selected]).removeClass('selected');
+    $(this).addClass('selected');
+    $('input').val($(this).text());
+    selected = $(this).index();
 }
 
 function HandleSearch() {
     const searchInput = $('input').val();
     const apiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${searchInput}&format=json&origin=*`;
-    const list = $('#search-list');
-    const visible = $('#visible-list');
-    list.empty();
-    visible.empty();
+    const $visible = $('#visible-list');
+    while ($visible.children().length < MAX_LIST) {
+        $li = $('<li></li>');
+        $li.on('click', ClickSearchElement);
+        $visible.append($li);
+    }
     selected = -1;
     $.getJSON(apiUrl, function(data) {
-        if (data.length > 0) {
-            data[1].forEach(searchTerm => {
-                const $li = $('<li>'+searchTerm+'</li>');
-                visible.append($li);
+        if (data[1]) { 
+            for (let i = 0; i < ((data[1].length < MAX_LIST) ? data[1].length : MAX_LIST); i++) {
+                $($visible.children()[i]).text(data[1][i]);
                 $li.on('click', ClickSearchElement);
+            }
+        } else {
+            $($visible.children()).each(function() {
+                $(this).text('');
             });
         }
     });
