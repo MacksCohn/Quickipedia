@@ -3,6 +3,7 @@ body {
     background-color: #111111;
     color: #EEEEEE;
     user-select: none;
+    font-family: 'Open Sans';
 }
 
 a {
@@ -19,8 +20,8 @@ a:visited, a:active {
 
 #center-box {
     width: fit-content;
-    height:10%;
-    margin: 25% auto;
+    height:fit-content;
+    margin: 10% auto;
     text-align: center;
     font-size: 400%;
     overflow:hidden;
@@ -28,6 +29,15 @@ a:visited, a:active {
 
 #full-text {
     visibility: hidden;
+}
+
+#start {
+    background-color: #111111;
+    color:white;
+    font-size: 100%;
+    border: 1px #444444 solid;
+    border-radius: 10px;
+    font-family: 'Open Sans';
 }
 
 ul {
