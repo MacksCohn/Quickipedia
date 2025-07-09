@@ -1,7 +1,6 @@
 // Max Cohn
 let selected = -1;
 const MAX_LIST = 10;
-const WIKI_LINK_HEAD = 'https://en.wikipedia.org/wiki/';
 
 $(document).ready(function() {
     $('#search').on('input', HandleSearch);
