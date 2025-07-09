@@ -2,6 +2,7 @@
 body {
     background-color: #111111;
     color: #EEEEEE;
+    user-select: none;
 }
 
 #center-box {
@@ -10,6 +11,10 @@ body {
     margin: 50% auto;
     text-align: center;
     font-size: 400%;
+}
+
+#search:focus {
+    outline:none;
 }
 
 #search {
@@ -31,6 +36,10 @@ ul#visible-list > li {
     text-align: right;
 }
 
+ul#visible-list > li:hover:not(.selected) {
+    color:powderblue;
+}
+
 .selected {
-    color:greenyellow;
+    color:mediumspringgreen;
 }

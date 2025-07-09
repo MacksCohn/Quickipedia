@@ -12,17 +12,24 @@ function HandleKeys(event) {
         OnKeyUp();
     else if (event.code === 'ArrowDown')
         OnKeyDown();
+    else if (event.code === 'Backspace')
+        ClearSelectedSearchElement();
+}
+
+function ClearSelectedSearchElement() {
+    $('#visible-list').children().each(function() {
+        $(this).removeClass('selected');
+    });
 }
 
 function OnKeyUp() {
     const $listElements = $('#visible-list li');
     if (selected != -1)
         $($listElements[selected]).removeClass('selected');
-    if (selected === -1) {
-        selected = 0;
-    } else if (selected > 0) {
+    if (selected === -1)
+        SetSelected(0);
+    else if (selected > 0)
         selected--;
-    }
     $('input').val($($listElements[selected]).text());
     $($listElements[selected]).addClass('selected');
 }
@@ -31,17 +38,16 @@ function OnKeyDown() {
     const $listElements = $('#visible-list li');
     if (selected != -1)
         $($listElements[selected]).removeClass('selected');
-    if (selected === -1) {
-        selected = 0;
-    } else if (selected < $listElements.length) {
+    if (selected === -1)
+        SetSelected(0);
+    else if (selected < $listElements.length)
         selected++;
-    }
+    
     $('input').val($($listElements[selected]).text());
     $($listElements[selected]).addClass('selected');
 }
 
 function ClickSearchElement() {
-    console.log($(this).text());
     if (selected != -1)
         $($('#visible-list').children()[selected]).removeClass('selected');
     $(this).addClass('selected');
@@ -71,4 +77,8 @@ function HandleSearch() {
             });
         }
     });
+}
+
+function SetSelected(index) {
+    selected = index;
 }
