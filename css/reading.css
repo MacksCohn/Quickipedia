@@ -40,6 +40,10 @@ a:visited, a:active {
     font-family: 'Open Sans';
 }
 
+#start:hover {
+    border-color: #aaaaaa; 
+}
+
 ul {
     margin: 0 auto;
     padding:0;
