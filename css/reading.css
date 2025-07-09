@@ -16,3 +16,22 @@ a:hover {
 a:visited, a:active {
     color: mediumspringgreen;
 }
+
+ul {
+    margin: 0 auto;
+    padding:0;
+    border: 1px #222222 solid;
+    border-radius: 5px;
+}
+
+ul > li {
+    list-style:none;
+}
+
+ul > li:hover:not(.selected) {
+    color:powderblue;
+}
+
+.selected {
+    color:mediumspringgreen;
+}
