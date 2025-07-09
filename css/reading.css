@@ -17,6 +17,19 @@ a:visited, a:active {
     color: mediumspringgreen;
 }
 
+#center-box {
+    width: fit-content;
+    height:10%;
+    margin: 25% auto;
+    text-align: center;
+    font-size: 400%;
+    overflow:hidden;
+}
+
+#full-text {
+    visibility: hidden;
+}
+
 ul {
     margin: 0 auto;
     padding:0;
