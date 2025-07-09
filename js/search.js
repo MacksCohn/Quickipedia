@@ -4,7 +4,7 @@ const MAX_LIST = 10;
 const WIKI_LINK_HEAD = 'https://en.wikipedia.org/wiki/';
 
 $(document).ready(function() {
-    $('input').on('input', HandleSearch);
+    $('#search').on('input', HandleSearch);
     $('input').on('keyup', HandleKeys);
 });
 
@@ -20,12 +20,13 @@ function HandleKeys(event) {
 }
 
 function SubmitSearch() {
-    // maybe do some check if the top list value is the same but in different casing and use the lists casing
-    let pageName = $('input').val();
+    let pageName = $('#search').val();
     const topListValue = $('#visible-list li:first').text();
     if (topListValue.toLowerCase() === pageName.toLowerCase())
         pageName = $('#visible-list li:first').text().replaceAll(' ', '_');
-    console.log(WIKI_LINK_HEAD + pageName.replaceAll(' ', '_'));
+    pageName = pageName.replaceAll(' ', '_');
+    localStorage.setItem('readingLink', pageName);
+    globalThis.location.href = './reading.html';
 }
 
 function ClearSelectedSearchElement() {
@@ -43,7 +44,7 @@ function OnKeyUp() {
         SetSelected(0);
     else if (selected > 0)
         selected--;
-    $('input').val($($listElements[selected]).text());
+    $('search').val($($listElements[selected]).text());
     $($listElements[selected]).addClass('selected');
 }
 
@@ -56,7 +57,7 @@ function OnKeyDown() {
     else if (selected < $listElements.length)
         selected++;
 
-    $('input').val($($listElements[selected]).text());
+    $('#search').val($($listElements[selected]).text());
     $($listElements[selected]).addClass('selected');
 }
 
@@ -64,16 +65,16 @@ function ClickSearchElement() {
     if (selected != -1)
         $($('#visible-list').children()[selected]).removeClass('selected');
     $(this).addClass('selected');
-    $('input').val($(this).text());
+    $('#search').val($(this).text());
     selected = $(this).index();
 }
 
 function HandleSearch() {
-    const searchInput = $('input').val();
+    const searchInput = $('#search').val();
     const apiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${searchInput}&format=json&origin=*`;
     const $visible = $('#visible-list');
     while ($visible.children().length < MAX_LIST) {
-        $li = $('<li></li>');
+        const $li = $('<li></li>');
         $li.on('click', ClickSearchElement);
         $visible.append($li);
     }
@@ -81,7 +82,7 @@ function HandleSearch() {
         if (data[1]) { 
             for (let i = 0; i < ((data[1].length < MAX_LIST) ? data[1].length : MAX_LIST); i++) {
                 $($visible.children()[i]).text(data[1][i]);
-                $li.on('click', ClickSearchElement);
+                $($visible.children()[i]).on('click', ClickSearchElement);
             }
         }
         else {

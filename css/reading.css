@@ -1,0 +1,18 @@
+/* Max Cohn */
+body {
+    background-color: #111111;
+    color: #EEEEEE;
+    user-select: none;
+}
+
+a {
+    color:white;
+}
+
+a:hover {
+    color:powderblue;
+}
+
+a:visited, a:active {
+    color: mediumspringgreen;
+}
