@@ -7,7 +7,7 @@ const apiGetSections = `https://en.wikipedia.org/w/api.php?action=parse&prop=sec
 const apiGetIntro = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&origin=*&exintro=&explaintext=&titles=${readingLink}`;
 
 let readingParagraph = 'If you are seeing this something has gone wrong';
-let readingDelay = 90;
+let readingDelay = 100;
 
 $(document).ready(function() {
     console.log(WIKI_LINK_HEAD + readingLink);

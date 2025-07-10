@@ -9,9 +9,9 @@ body {
 #center-box {
     width: fit-content;
     height:10%;
-    margin: 40vh auto;
+    margin: 35vh auto;
     text-align: center;
-    font-size: 400%;
+    font-size: 10vw;
 }
 
 #search:focus {
@@ -20,7 +20,8 @@ body {
 }
 
 #search {
-    width:50%;
+    width:35vw;
+    height: 3vw;
     text-align: right;
     background-color: #cccccc;
     border-radius: 5px;
