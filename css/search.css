@@ -9,18 +9,21 @@ body {
 #center-box {
     width: fit-content;
     height:10%;
-    margin: 50% auto;
+    margin: 40vh auto;
     text-align: center;
     font-size: 400%;
 }
 
 #search:focus {
     outline:none;
+    background-color:#ffffff;
 }
 
 #search {
     width:50%;
     text-align: right;
+    background-color: #cccccc;
+    border-radius: 5px;
 }
 
 #visible-list {

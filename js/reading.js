@@ -7,6 +7,7 @@ const apiGetSections = `https://en.wikipedia.org/w/api.php?action=parse&prop=sec
 const apiGetIntro = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&origin=*&exintro=&explaintext=&titles=${readingLink}`;
 
 let readingParagraph = 'If you are seeing this something has gone wrong';
+let readingDelay = 90;
 
 $(document).ready(function() {
     console.log(WIKI_LINK_HEAD + readingLink);
@@ -23,9 +24,22 @@ $(document).ready(function() {
                 $('#sections').append(`<li>${section.line.substring(section.line.indexOf('^'))}</li>`);
         });
     })
-    $('#start').on('click', ReadParagraph);
+    $('#read').on('click', ReadParagraph);
 });
 
-function ReadParagraph() {
+async function ReadParagraph() {
     console.log(readingParagraph);
+    const words = readingParagraph.split(' ');
+    for (let word = 0; word < words.length; word++) {
+        if (words[word] === '\n' || words[word] === '')
+            continue;
+        $('#read').text(words[word]);
+        await sleep(readingDelay);
+    }
+    await sleep(readingDelay);
+    $('#read').text('Read Again');
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

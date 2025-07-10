@@ -5,10 +5,14 @@
         <link rel='stylesheet' href='./css/reading.css'>
     </head>
     <body>
-        <a href='index.html'>Search</a>
-        <h1 id='title'></h1>
+        <span id='search'>Quickipedia <a href='index.html'>Search</a></span>
+        <h1 id='header'>
+            <span id='title'></span>
+            <span class='subcategory'> > </span>
+            <span class='subcategory' id='category'>Description</span>
+        </h1>
         <div id='center-box'>
-            <button id='start'><a>Read</a></button>
+            <button id='read'><a>Read</a></button>
             <p id='full-text'></p>
         </div>
         <ul id='sections'></ul>

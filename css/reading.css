@@ -14,6 +14,15 @@ a:hover {
     color:powderblue;
 }
 
+.subcategory {
+    font-size: 70%;
+}
+
+#search {
+    position:absolute;
+    right: 2%;
+}
+
 a:visited, a:active {
     color: mediumspringgreen;
 }
@@ -21,7 +30,7 @@ a:visited, a:active {
 #center-box {
     width: fit-content;
     height:fit-content;
-    margin: 10% auto;
+    margin: 25vh auto;
     text-align: center;
     font-size: 400%;
     overflow:hidden;
@@ -31,7 +40,7 @@ a:visited, a:active {
     visibility: hidden;
 }
 
-#start {
+#read {
     background-color: #111111;
     color:white;
     font-size: 100%;
@@ -40,7 +49,7 @@ a:visited, a:active {
     font-family: 'Open Sans';
 }
 
-#start:hover {
+#read:hover {
     border-color: #aaaaaa; 
 }
 
@@ -49,6 +58,9 @@ ul {
     padding:0;
     border: 1px #222222 solid;
     border-radius: 5px;
+    width:100vw;
+    position:absolute;
+    bottom:0;
 }
 
 ul > li {
