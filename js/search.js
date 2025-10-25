@@ -66,6 +66,7 @@ function ClickSearchElement() {
     $(this).addClass('selected');
     $('#search').val($(this).text());
     selected = $(this).index();
+    SubmitSearch();
 }
 
 function HandleSearch() {
