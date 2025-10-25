@@ -8,10 +8,9 @@ body {
 
 #center-box {
     width: fit-content;
-    height:10%;
     margin: 35vh auto;
     text-align: center;
-    font-size: 10vw;
+    font-size: 10vh;
 }
 
 #search:focus {
@@ -20,16 +19,17 @@ body {
 }
 
 #search {
-    width:35vw;
-    height: 3vw;
+    width:35vh;
+    height: 3vh;
     text-align: right;
     background-color: #cccccc;
     border-radius: 5px;
+    font-size: 2vh;
 }
 
 #visible-list {
     margin: 0 auto;
-    width:50%;
+    width: 35vh;
     padding:0;
     border: 1px #222222 solid;
     border-radius: 5px;
