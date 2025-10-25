@@ -43,7 +43,7 @@ function OnKeyUp() {
         SetSelected(0);
     else if (selected > 0)
         selected--;
-    $('search').val($($listElements[selected]).text());
+    $('#search').val($($listElements[selected]).text());
     $($listElements[selected]).addClass('selected');
 }
 
