@@ -19,13 +19,22 @@ function HandleKeys(event) {
 }
 
 function SubmitSearch() {
-    let pageName = $('#search').val();
-    const topListValue = $('#visible-list li:first').text();
-    if (topListValue.toLowerCase() === pageName.toLowerCase())
-        pageName = $('#visible-list li:first').text().replaceAll(' ', '_');
-    pageName = pageName.replaceAll(' ', '_');
-    localStorage.setItem('readingLink', pageName);
-    globalThis.location.href = './reading.html';
+    if (selected === -1 || selected === 0) {
+        const topListValue = $('#visible-list li:first').text();
+        let pageName = $('#visible-list li:first').text().replaceAll(' ', '_');
+        pageName = pageName.replaceAll(' ', '_');
+        localStorage.setItem('readingLink', pageName);
+        globalThis.location.href = './reading.html';
+    }
+    else {
+        let pageName = $('#search').val();
+        const topListValue = $('#visible-list li:first').text();
+        if (topListValue.toLowerCase() === pageName.toLowerCase())
+            pageName = $('#visible-list li:first').text().replaceAll(' ', '_');
+        pageName = pageName.replaceAll(' ', '_');
+        localStorage.setItem('readingLink', pageName);
+        globalThis.location.href = './reading.html';
+    }
 }
 
 function ClearSelectedSearchElement() {
@@ -53,7 +62,7 @@ function OnKeyDown() {
         $($listElements[selected]).removeClass('selected');
     if (selected === -1)
         SetSelected(0);
-    else if (selected < $listElements.length)
+    else if (selected < $listElements.length - 1)
         selected++;
 
     $('#search').val($($listElements[selected]).text());

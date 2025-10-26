@@ -12,6 +12,8 @@ let descriptionParagraph = '';
 let readingDelay = 120;
 
 $(document).ready(function() {
+    $('#search-button').on('click', function() {ToggleSearchBar()});
+
     console.log(WIKI_LINK_HEAD + readingLink);
     $('#title').text(readingLink.replaceAll('_', ' '));
     $.getJSON(apiGetIntro, function(data) {
@@ -20,10 +22,11 @@ $(document).ready(function() {
             descriptionParagraph = readingParagraph;
     });
 
-    const titleListElement = $(`<li>Description</li>`);
+    const titleName = 'Summary';
+    const titleListElement = $(`<li>${titleName}</li>`);
     titleListElement.on('click', function() { 
         readingParagraph = descriptionParagraph;
-        ChangeSectionName('Description');
+        ChangeSectionName(titleName);
     });
     $('#sections').append(titleListElement);
     // add sections to list below reading area
@@ -44,7 +47,7 @@ $(document).ready(function() {
 function ChangeSectionName(name) {
     $('#category.subcategory').text(name);
     $('#category.subcategory').animate({
-        fontSize: '90%',
+        fontSize: '100%',
     }, 100, 'swing');
     $('#category.subcategory').animate({
         fontSize: '80%',
@@ -74,6 +77,18 @@ async function ReadParagraph() {
     }
     await sleep(readingDelay);
     $('#read').text('Read Again');
+}
+
+function ToggleSearchBar() {
+    console.log('toggling');
+    if ($('#search-box').is('[hidden]') === true) {
+        $('#search-box').removeAttr('hidden');
+        $('#search-button').addClass('active');
+    }
+    else {
+        $('#search-box').attr('hidden', true);
+        $('#search-button').removeClass('active');
+    }
 }
 
 function sleep(ms) {
