@@ -72,11 +72,11 @@ async function ReadParagraph() {
     for (let word = 0; word < words.length; word++) {
         if (words[word] === '\n' || words[word] === '')
             continue;
-        $('#read').text(words[word]);
+        $('#read a').text(words[word]);
         await sleep(readingDelay);
     }
     await sleep(readingDelay);
-    $('#read').text('Read Again');
+    $('#read a').text('Read Again');
 }
 
 function ToggleSearchBar() {
@@ -95,25 +95,20 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function parseWikitextToPlainText(wikitext) {
-    if (!wikitext)
-        return "";
-    let text = String(wikitext);
-    text = text.replace(/<ref>[\s\S]*?<\/ref>/g, '');
-    text = text.replace(/<ref[\s\S]*?\/>/g, '');
-    text = text.replace(/<[^>]+>/g, '');
-    text = text.replace(/\{\{[^}]+\}\}/g, '');
-    text = text.replace(/\[\[[^|\]]+\|([^\]]+)\]\]/g, '$1');
-    text = text.replace(/\[\[([^\]]+)\]\]/g, '$1');
-    text = text.replace(/\[\s*https?:\/\/[^ \]]+ ([^\]]+)\]/g, '$1');
-    text = text.replace(/\[\s*https?:\/\/[^ \]]+\]/g, '');
-    text = text.replace(/https?:\/\/[^\s]+/g, '');
-    text = text.replace(/'''/g, ''); // Bold
-    text = text.replace(/''/g, '');  // Italic
-    text = text.replace(/[\=\*\#\:\;\|\-\{\}\[\]]/g, '');
-    text = text.replace(/(\r\n|\n){3,}/g, '\n\n');
-    text = text.replace(/^[ \t]+/gm, '');
-    text = text.replace(/[ \t]+/g, ' ');
+function parseWikitextToPlainText(wikiText) {
+    let text = wikiText;
+    text = text.replace(/\n?={2,}.*?={2,}\n?/g, '\n');
+    text = text.replace(/<ref[^>]*>.*?<\/ref>/gs, '');
+    text = text.replace(/<ref[^>]*\/>/g, '');
+    text = text.replace(/\[\[[^|\]]*?\|(.*?)\]\]/g, '$1');
+    text = text.replace(/\[\[(.*?)\]\]/g, '$1');
+    text = text.replace(/{{.*?}}/g, '');
+    text = text.replace(/{{.*?}}/g, '');
+    text = text.replace(/&vert;/g, '');
+    text = text.replace(/'{2,}/g, '');
+    text = text.replace(/\n\s*\n/g, '\n\n');
+    text = text.split('\n').map(line => line.trim()).join('\n');
+    text = text.trim();
 
-    return text.trim();
+    return text;
 }
