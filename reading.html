@@ -3,9 +3,15 @@
         <title>Quickipedia</title>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
         <link rel='stylesheet' href='./css/reading.css'>
+        <script src='./js/search.js'></script>
     </head>
     <body>
-        <span id='search'><a href='index.html'>Quickipedia</a></span>
+        <div id='search-box' hidden='false'>
+            <input id='search' list='search-list' placeholder="Search" autocomplete='off'>
+            <ul id='visible-list'>
+            </ul>
+        </div>
+        <div id='search-button'><img src='Search-Icon.png'></div>
         <h1 id='header'>
             <span id='title'></span>
             <span class='subcategory'> > </span>
@@ -14,6 +20,8 @@
         <div id='center-box'>
             <button id='read'><a>Read</a></button>
             <p id='full-text'></p>
+        </div>
+        <div id='controls'>
         </div>
         <ul id='sections'></ul>
     </body>
