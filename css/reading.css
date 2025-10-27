@@ -20,9 +20,11 @@ a:hover {
 
 h1 {
     font-size: 3vh;
+    margin:auto auto;
+    text-align: center;
 }
 
-#search-button {
+#search-button, #home-button {
     position:fixed;
     font-size: 3vh;
     top: 5px;
@@ -32,9 +34,14 @@ h1 {
     border-radius: 10px;
     padding: 3px 3px 3px 3px;
     background-color: #111111;
+    align-items: center;
 }
 
-#search-button > img {
+#home-button {
+    left:5px;
+}
+
+#search-button > img, #home-button > a > img {
     width:100%;
     user-select: none;
     -webkit-user-drag: none;
@@ -57,7 +64,7 @@ h1 {
 }
 
 #search {
-    width: 80vw;
+    width: 70vw;
     height: 4vh;
     text-align: right;
     background-color: #cccccc;
