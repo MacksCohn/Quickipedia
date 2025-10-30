@@ -134,7 +134,7 @@ ul:not(#visible-list) > li:hover:not(.selected) {
 #visible-list {
     position:fixed;
     margin: 0 auto;
-    width: 80vw;
+    width: 70vw;
     padding:0;
     border: 1px #222222 solid;
     border-radius: 5px;
