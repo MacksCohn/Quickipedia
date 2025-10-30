@@ -48,25 +48,20 @@ $(document).ready(function() {
 
 function ChangeSectionName(name) {
     $('#category.subcategory').text(name);
-    $('#category.subcategory').animate({
-        fontSize: '100%',
-    }, 100, 'swing');
-    $('#category.subcategory').animate({
-        fontSize: '80%',
-    }, 100, 'swing');
+    BounceTextAnimation('#category.subcategory', '100%', '80%');
 }
 
 function ChangeSelectedParagraph(index, subtitle) {
-    ChangeSectionName(subtitle);
-
     $('#read').prop('disabled', true);
     $('#read a').text('Loading...');
     $.getJSON(apiGetSectionText + index.toString(), function(data) {
+        ChangeSectionName(subtitle);
         readingParagraph = parseWikitextToPlainText(data.parse.wikitext['*']);
         UpdateWordCounter(readingParagraph)
+        $('#read').prop('disabled', false);
+        $('#read a').text('Read');
     });
-    $('#read').prop('disabled', false);
-    $('#read a').text('Read');
+    console.log($('#read a').text());
 }
 
 async function ReadParagraph() {
@@ -107,12 +102,6 @@ function ToggleSearchBar() {
             $('#search-box').attr('hidden', true);
         });
     }
-    // $('#category.subcategory').animate({
-      //   fontSize: '100%',
-    // }, 100, 'swing');
-    // $('#category.subcategory').animate({
-        // fontSize: '80%',
-    // }, 100, 'swing');
 }
 
 function UpdateWordCounter(paragraph) {
@@ -121,6 +110,16 @@ function UpdateWordCounter(paragraph) {
     paragraph = paragraph.filter(item => item !== '');
     paragraph = paragraph.filter(item => item !== '\n');
     $('#word-count').text(paragraph.length.toString());
+    BounceTextAnimation('#word-count', '120%', '100%');
+}
+
+function BounceTextAnimation(object, big, small) {
+    $(object).animate({
+      fontSize: big,
+    }, 150, 'swing');
+    $(object).animate({
+        fontSize: small,
+    }, 150, 'swing');
 }
 
 function sleep(ms) {
