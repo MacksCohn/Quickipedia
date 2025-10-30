@@ -3,7 +3,7 @@ body {
     background-color: #111111;
     color: #EEEEEE;
     user-select: none;
-    font-family: 'Open Sans';
+    font-family: 'Times New Roman';
 }
 
 a {
@@ -27,7 +27,7 @@ h1 {
 #search-button, #home-button {
     position:fixed;
     font-size: 3vh;
-    top: 5px;
+    bottom: 41vh;
     right: 5px;
     width: 4vh;
     border: 1px #444444 solid;
@@ -37,8 +37,8 @@ h1 {
     align-items: center;
 }
 
-#home-button {
-    left:5px;
+#search-button {
+    bottom: calc(41vh + 6vh);
 }
 
 #search-button > img, #home-button > a > img {
@@ -59,6 +59,8 @@ h1 {
 }
 
 #search-box {
+    position: relative;
+    top: -3px;
     width: fit-content;
     margin:auto auto;
 }
@@ -97,10 +99,10 @@ a:visited, a:active {
     font-size: 100%;
     border: 1px #444444 solid;
     border-radius: 10px;
-    font-family: 'Open Sans';
+    font-family: 'Times New Roman';
 }
 
-#read:hover {
+#read:hover, #search-button:hover, #home-button:hover {
     border-color: #aaaaaa; 
 }
 
@@ -147,4 +149,8 @@ ul:not(#visible-list) > li:hover:not(.selected) {
 
 #visible-list > li:hover:not(.selected) {
     color:powderblue;
+}
+
+#controls {
+    font-size: 60%;
 }

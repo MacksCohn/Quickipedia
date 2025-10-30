@@ -20,6 +20,7 @@ $(document).ready(function() {
         for (const page in data.query.pages)
             readingParagraph = (data.query.pages[page].extract);
             descriptionParagraph = readingParagraph;
+        UpdateWordCounter(readingParagraph)
     });
 
     const titleName = 'Summary';
@@ -27,6 +28,7 @@ $(document).ready(function() {
     titleListElement.on('click', function() { 
         readingParagraph = descriptionParagraph;
         ChangeSectionName(titleName);
+        UpdateWordCounter(readingParagraph)
     });
     $('#sections').append(titleListElement);
     // add sections to list below reading area
@@ -61,6 +63,7 @@ function ChangeSelectedParagraph(index, subtitle) {
     $('#read a').text('Loading...');
     $.getJSON(apiGetSectionText + index.toString(), function(data) {
         readingParagraph = parseWikitextToPlainText(data.parse.wikitext['*']);
+        UpdateWordCounter(readingParagraph)
     });
     $('#read').prop('disabled', false);
     $('#read a').text('Read');
@@ -73,6 +76,7 @@ async function ReadParagraph() {
         if (words[word] === '\n' || words[word] === '')
             continue;
         $('#read a').text(words[word]);
+        $('#current-word').text((word +1).toString());
         await sleep(readingDelay);
     }
     await sleep(readingDelay);
@@ -84,11 +88,39 @@ function ToggleSearchBar() {
     if ($('#search-box').is('[hidden]') === true) {
         $('#search-box').removeAttr('hidden');
         $('#search-button').addClass('active');
+        $('#search-box').animate({
+            top: '-30px',
+        }, 1, 'swing');
+        $('#search-box').animate({
+            top: '-3px',
+        }, 150, 'swing');
+        $('#search-box input').focus();
     }
     else {
-        $('#search-box').attr('hidden', true);
-        $('#search-button').removeClass('active');
+        $('#search-box').animate({
+            top: '-3px',
+        }, 1, 'swing');
+        $('#search-box').animate({
+            top: '-30px',
+        }, 150, 'swing', function() {
+            $('#search-button').removeClass('active');
+            $('#search-box').attr('hidden', true);
+        });
     }
+    // $('#category.subcategory').animate({
+      //   fontSize: '100%',
+    // }, 100, 'swing');
+    // $('#category.subcategory').animate({
+        // fontSize: '80%',
+    // }, 100, 'swing');
+}
+
+function UpdateWordCounter(paragraph) {
+    $('#current-word').text('0');
+    paragraph = paragraph.split(' ');
+    paragraph = paragraph.filter(item => item !== '');
+    paragraph = paragraph.filter(item => item !== '\n');
+    $('#word-count').text(paragraph.length.toString());
 }
 
 function sleep(ms) {
