@@ -9,7 +9,11 @@ const apiGetSectionText = `https://en.wikipedia.org/w/api.php?action=parse&forma
 
 let readingParagraph = 'If you are seeing this something has gone wrong';
 let descriptionParagraph = '';
-let readingDelay = 120;
+
+if (localStorage.getItem('wpm') === null)
+    localStorage.setItem('wpm', 420);
+let wpm = Number(localStorage.getItem('wpm')); // use get and set item, conditional operator
+let readingDelay = 60000 / wpm;
 
 $(document).ready(function() {
     $('#search-button').on('click', function() {ToggleSearchBar()});
@@ -44,6 +48,9 @@ $(document).ready(function() {
         });
     })
     $('#read').on('click', ReadParagraph);
+    $('#words-per-minute').text(wpm.toString());
+    $('#speed-up-button').on('click', function() {UpdateWordsPerMinute(20)});
+    $('#speed-down-button').on('click', function() {UpdateWordsPerMinute(-20)});
 });
 
 function ChangeSectionName(name) {
@@ -120,6 +127,13 @@ function BounceTextAnimation(object, big, small) {
     $(object).animate({
         fontSize: small,
     }, 150, 'swing');
+}
+
+function UpdateWordsPerMinute(amount) {
+    wpm += amount;
+    readingDelay = 60000 / wpm;
+    localStorage.setItem('wpm', wpm);
+    $('#words-per-minute').text(wpm.toString());
 }
 
 function sleep(ms) {

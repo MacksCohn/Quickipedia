@@ -93,16 +93,29 @@ a:visited, a:active {
     visibility: hidden;
 }
 
-#read {
+button {
     background-color: #111111;
     color:white;
-    font-size: 100%;
     border: 1px #444444 solid;
     border-radius: 10px;
     font-family: 'Times New Roman';
 }
 
-#read:hover, #search-button:hover, #home-button:hover {
+#read {
+    font-size: 100%;
+}
+
+#speed-up-button, #speed-down-button {
+    font-size: 40%;
+    text-align: center;
+    vertical-align: center;
+}
+
+#words-per-minute, #wpm-label {
+    font-size: 80%;
+}
+
+button:hover, #search-button:hover, #home-button:hover {
     border-color: #aaaaaa; 
 }
 
